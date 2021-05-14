@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "noImplicitAny": true,
+    "outDir": "dist",
+    "removeComments": true,
+    "strict": true,
+    "target": "ES6"
+  },
+  "exclude": ["node_modules", "dist"]
+}

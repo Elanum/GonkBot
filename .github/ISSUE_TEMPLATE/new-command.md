@@ -1,7 +1,7 @@
 ---
 name: New Command
 about: Suggest a new commad for the Discord bot
-title: "[Command] Command Name"
+title: "Add "Command Name" command"
 labels: command, enhancement
 assignees: ''
 
