@@ -7,19 +7,8 @@
     "build": "rm -rf dist/; tsc --build",
     "dev": "tsnd --clear src/app.ts",
     "lint": "eslint . --fix",
-    "start": "node dist/app.js"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint",
-      "pre-push": "npm run lint",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
+    "start": "node dist/app.js",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
