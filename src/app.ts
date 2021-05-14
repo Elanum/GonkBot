@@ -1,6 +1,7 @@
 import {
   Client, Intents, Interaction, Message,
 } from 'discord.js';
+import logger from './util/logger';
 
 require('dotenv').config();
 
@@ -10,7 +11,7 @@ const client: Client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 });
 
-client.on('ready', () => console.log(`Logged in as ${client.user?.tag}!`));
+client.on('ready', () => logger.info(`Logged in as ${client.user?.tag}!`));
 
 client.on('message', async (message: Message): Promise<void> => {
   if (!client.application?.owner) await client.application?.fetch();
@@ -58,5 +59,5 @@ client.on('interaction', async (interaction: Interaction) => {
 
 client
   .login(TOKEN)
-  .then((): void => console.log('🚀 Bot started'))
-  .catch((error: Error): void => console.error(error.message));
+  .then(() => logger.info('🚀 Bot started'))
+  .catch((error: Error) => logger.error(error.message));
