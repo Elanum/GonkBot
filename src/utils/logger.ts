@@ -20,6 +20,7 @@ const gonkFormat = combine(
 logger.add(
   new Console({
     format: combine(colorize(), gonkFormat),
+    level: 'debug',
   }),
 );
 
