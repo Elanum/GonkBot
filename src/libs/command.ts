@@ -1,22 +1,10 @@
 import {
-  APIMessage,
   ApplicationCommandData,
   CommandInteraction,
-  MessageAdditions,
-  MessageEmbed,
 } from 'discord.js';
 
-const defaultResponse: MessageEmbed = new MessageEmbed()
-  .setTitle('ERROR')
-  .setColor('RED')
-  .setDescription('No response defined');
-
-type CommandResponse = string | APIMessage | MessageAdditions;
-
-class Command {
-  private data: ApplicationCommandData;
-
-  private responseMessage: CommandResponse = defaultResponse;
+abstract class Command {
+  public data: ApplicationCommandData;
 
   public constructor(data: ApplicationCommandData) {
     this.data = data;
@@ -30,21 +18,7 @@ class Command {
     return this.data.description;
   }
 
-  public get commandData(): ApplicationCommandData {
-    return this.data;
-  }
-
-  public set response(data: CommandResponse) {
-    this.responseMessage = data;
-  }
-
-  public get response(): CommandResponse {
-    return this.responseMessage;
-  }
-
-  public async sendResponse(interaction: CommandInteraction): Promise<void> {
-    await interaction.reply(this.response);
-  }
+  abstract sendResponse(interaction: CommandInteraction): Promise<void>;
 }
 
 export default Command;

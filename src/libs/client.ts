@@ -4,7 +4,7 @@ import Command from './command';
 class Client extends DiscordClient {
   public commands: Collection<string, Command>;
 
-  constructor(props: ClientOptions) {
+  public constructor(props: ClientOptions) {
     super(props);
     this.commands = new Collection();
   }

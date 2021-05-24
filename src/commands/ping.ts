@@ -11,10 +11,13 @@ class Ping extends Command {
 
   public async sendResponse(interaction: CommandInteraction): Promise<void> {
     const ping = `Ping is ${Date.now() - interaction.createdTimestamp}ms`;
-    this.response = new MessageEmbed().setTitle('Ping').setDescription(ping);
+    const response = new MessageEmbed()
+      .setColor('GREEN')
+      .setTitle('Ping')
+      .setDescription(ping);
     await interaction.reply({
       ephemeral: true,
-      embeds: [this.response],
+      embeds: [response],
     });
   }
 }

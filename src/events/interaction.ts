@@ -7,7 +7,7 @@ const onInteraction = async (
 ): Promise<void> => {
   if (!interaction.isCommand()) return;
   const { commandName } = interaction;
-  const command = client.commands.find((c) => c.name === commandName);
+  const command = client.commands.get(commandName);
   if (command) await command.sendResponse(interaction);
 };
 
