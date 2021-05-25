@@ -12,16 +12,44 @@ class Info extends Command {
 
   public async sendResponse(interaction: CommandInteraction): Promise<void> {
     const { npm_package_version } = process.env;
-    const { id, username } = interaction.client.user!;
+    const { client } = interaction;
+    const {
+      uptime, user, users, guilds,
+    } = client;
+
+    if (!user) return;
+    const { id, username } = user;
+
+    const guildsAmount = guilds.cache.size;
+    const icon = user.avatarURL();
     const memory = process.memoryUsage().heapUsed / 1024 / 1024;
+    const memoryUsage = `${Math.round(memory * 100) / 100} MB`;
+    const prettyUptime = prettyMilliseconds(uptime || 0, {
+      secondsDecimalDigits: 0,
+    });
+    const usersAmount = users.cache.size;
+
     const response = new MessageEmbed()
       .setTitle(`${username} v${npm_package_version}`)
       .setColor('BLUE')
+      .setDescription('🤖 The most powerful droid on Discord')
       .addField('Developer', '[Elanum](https://elanum.de)', true)
       .addField('Bot ID', id, true)
-      .addField('Memory Usage', `${Math.round(memory * 100) / 100} MB`, true)
-      .addField('Bugs', 'https://github.com/Elanum/GonkBot/issues', true)
-      .addField('Uptime', prettyMilliseconds(interaction.client.uptime!));
+      .addField(
+        'Presence',
+        `${guildsAmount} Servers\n${usersAmount} Users`,
+        true,
+      )
+      .addField('Uptime', prettyUptime, true)
+      .addField('Memory Usage', memoryUsage, true)
+      .addField(
+        'Repository',
+        '[GitHub](https://github.com/Elanum/GonkBot "GonkBot")',
+        true,
+      );
+
+    if (icon) response.setThumbnail(icon);
+
     await interaction.reply(response);
   }
 }
