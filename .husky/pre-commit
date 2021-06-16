@@ -1,4 +1,13 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npx --no-install lint-staged
+echo '🏗️  Styling your staged files before committing'
+
+npx --no-install lint-staged ||
+(
+  echo '❌ Hey! I think you ignoring my rules!
+   ESLint Check Failed. Make the required changes listed above, add changes and try to commit again.'
+  false;
+)
+
+echo '✅  Great! Thats a good looking code!'
