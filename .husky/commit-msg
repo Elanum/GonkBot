@@ -1,4 +1,12 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npx --no-install commitlint --edit ""
+echo '📝  Checking your commit message (e.g: "feat: ✨ add new feature")'
+
+npx --no-install commitlint --edit "$1" ||
+(
+  echo '❌  I know its annoying sometimes, but please use conventional commits'
+  false;
+)
+
+echo '✅  Looks fine to me!'
